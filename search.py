@@ -3,7 +3,7 @@ import copy
 import math
 
 def minimax(evaluator, board, depth):
-	return alphabeta(evaluator, board, depth, -math.inf, math.inf)
+	return alphabeta(evaluator, board, depth-1, -math.inf, math.inf)
 		
 def alphabeta(evaluator, board, depth, a, b):
 	if board.is_game_over(claim_draw=True):
