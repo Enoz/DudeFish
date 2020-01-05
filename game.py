@@ -1,9 +1,9 @@
 import threading
 import chess
 import search
-import evaluation
+from evaluation import Evaluators
 
-evaluator = evaluation.pure_material
+evaluator = Evaluators.mobility
 search_depth = 3
 
 class Game(threading.Thread):
