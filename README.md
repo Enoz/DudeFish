@@ -1,5 +1,5 @@
  # DudeFish
-DudeFish is an AI chess engine that runs on [Lichess](https://lichess.org) out of the box
+DudeFish is an AI chess engine that runs on [Lichess](https://lichess.org) out of the box.
 The goal of the engine is to gradually progress in to a winning position by strategically choosing game branches.
 ## Implementation
 At it's core, the engine uses the [Minimax](https://en.wikipedia.org/wiki/Minimax) algorithm with [Alpha-Beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning), and evaluates leaves at shallow depths with an evaluation function.
