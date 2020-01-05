@@ -3,8 +3,8 @@ import chess
 import search
 from evaluation import Evaluators
 
-evaluator = Evaluators.mobility
-search_depth = 3
+evaluator = Evaluators.dudefish
+search_depth = 4
 
 class Game(threading.Thread):
 	def __init__(self, client, game_id, **kwargs):
