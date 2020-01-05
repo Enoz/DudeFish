@@ -3,7 +3,7 @@ import chess
 import search
 import evaluation
 
-evaluator = evaluation.evaluator
+evaluator = evaluation.pure_material
 search_depth = 3
 
 class Game(threading.Thread):
@@ -25,7 +25,6 @@ class Game(threading.Thread):
 		return board
  	
 	def run(self):
-		#if self.color == chess.WHITE:
 		#perform first move if necessary
 		self.handle_state_change(self.current_state['state'])
 		for event in self.stream:
@@ -36,4 +35,5 @@ class Game(threading.Thread):
 		board = self.create_board(game_state)
 		if board.turn == self.color:
 			mv, val = search.minimax(evaluator, board, search_depth)
-			self.client.bots.make_move(self.game_id, mv)
+			if mv != None:
+				self.client.bots.make_move(self.game_id, mv)
