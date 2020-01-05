@@ -7,7 +7,6 @@ with open('./lichess.token') as f:
 
 session = berserk.TokenSession(token)
 client = berserk.Client(session)
-botid = client.account.get()['id']
 
 games = []
 
