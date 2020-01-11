@@ -12,7 +12,10 @@ games = []
 
 for event in client.bots.stream_incoming_events():
 	if event['type'] == 'challenge':
-		client.bots.accept_challenge(event['challenge']['id'])
+		try:
+			client.bots.accept_challenge(event['challenge']['id'])
+		except:
+			print("Failed to accept challenge %s" % event['challenge']['id'])
 	elif event['type'] == 'gameStart':
 		game = Game(client, event['game']['id'])
 		game.start()

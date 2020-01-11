@@ -58,7 +58,6 @@ def pawn_push(board):
 			pcolor = piece.color
 			#more points for being futher up the board
 			rank = chess.square_rank(square)
-			total = -0.4 #compensate for pawn scoring 1 by default
 			if pcolor == chess.BLACK:
 				total -= (7-rank) * 0.1
 			else:

@@ -14,8 +14,9 @@ class Game(threading.Thread):
 		self.stream = client.bots.stream_game_state(game_id)
 		self.current_state = next(self.stream)
 		self.color = chess.BLACK
-		if self.current_state['white']['id'] == client.account.get()['id']:
-			self.color = chess.WHITE
+		if self.current_state['white']:
+			if self.current_state['white']['id'] == client.account.get()['id']:
+				self.color = chess.WHITE
 		
 	def create_board(self, state):
 		board = chess.Board()
@@ -32,8 +33,15 @@ class Game(threading.Thread):
 				self.handle_state_change(event)
 	
 	def handle_state_change(self, game_state):
-		board = self.create_board(game_state)
-		if board.turn == self.color:
-			mv, val = search.minimax(evaluator, board, search_depth)
-			if mv != None:
-				self.client.bots.make_move(self.game_id, mv)
+		try:
+			self.current_state = game_state
+			board = self.create_board(game_state)
+			if board.turn == self.color:
+				mv, val = search.minimax(evaluator, board, search_depth)
+				#_, cb = search.minimax(evaluator, board, 0)
+				if mv != None:
+					print("%s - %f" % (mv , val))
+					self.client.bots.make_move(self.game_id, mv)
+		except:
+			print("Failed to make move in game %s as " % self.game_id)
+			self.handle_state_change(self.current_state)
